@@ -7,38 +7,39 @@
  *
  * 思考：
  *     subscribe 注册回调，dispatch触发回调，这不就是发布订阅模式么？
- */
 
-//简单版
-// export function createStore(reducer){
-//     let state;  //state记录所有状态
-//     let listeners = [];  //listeners保存所有注册的回调
-//
-//     function subscribe(callback){  //subscribe就是将所有的回调保存下来
-//         listeners.push(callback);
-//     }
-//
-//     function dispatch(action){  //dispatch就是将所有的回调都拿出来执行
-//         state = reducer(state, action);  //每次dispatch触发回调之前，都要先执行reducer修改state
-//
-//         for(let i=0, l=listeners.length; i<l; i++){
-//             const listener = listeners[i];
-//             listener();
-//         }
-//     }
-//
-//     function getState(){  //getState直接返回state
-//         return state;
-//     }
-//
-//     const store =  {  //store包装一下前面的方法，直接返回
-//         getState,
-//         subscribe,
-//         dispatch
-//     };
-//
-//     return store;
-// }
+
+// 简单版
+export function createStore(reducer){
+    let state;  //state记录所有状态
+    let listeners = [];  //listeners保存所有注册的回调
+
+    function subscribe(callback){  //subscribe就是将所有的回调保存下来
+        listeners.push(callback);
+    }
+
+    function dispatch(action){  //dispatch就是将所有的回调都拿出来执行
+        state = reducer(state, action);  //每次dispatch触发回调之前，都要先执行reducer修改state
+
+        for(let i=0, l=listeners.length; i<l; i++){
+            const listener = listeners[i];
+            listener();
+        }
+    }
+
+    function getState(){  //getState直接返回state
+        return state;
+    }
+
+    const store =  {  //store包装一下前面的方法，直接返回
+        getState,
+        subscribe,
+        dispatch
+    };
+
+    return store;
+}
+ */
 
 
 /**
@@ -153,31 +154,31 @@ export function applyMiddleware(middleware){
  *  所以，说白了，中间件就是加强dispatch的功能，用新的dispatch替代老的dispatch，这就是 装饰器模式。
  *      其实前面enhancer也是装饰器模式，传入createStore， 在createStore执行前后加上一些代码，最后又返回一个加强版的createStore。
  *  遵循这个思路，我们的applyMiddleware就可以写出来了：
- */
 
-// export function applyMiddleware(middleware){
-//     function enhancer(createStore){
-//         function newCreateStore(reducer){
-//             const store = createStore(reducer);
-//
-//             //将middleware拿过来执行以下，得到第一层函数
-//             let func = middleware(store);
-//
-//             //结构出最原始的dispatch
-//             let {dispatch} = store;
-//
-//             //将原始的dispatch传入func,执行后得到加强版的dispatch
-//             let newDispatch = func(dispatch);
-//
-//             //返回的时候，用新的dispatch替代老的
-//             return {...store, dispatch: newDispatch};
-//         }
-//
-//         return newCreateStore;
-//     }
-//
-//     return enhancer;
-// }
+export function applyMiddleware(middleware){
+    function enhancer(createStore){
+        function newCreateStore(reducer){
+            const store = createStore(reducer);
+
+            //将middleware拿过来执行以下，得到第一层函数
+            let func = middleware(store);
+
+            //结构出最原始的dispatch
+            let {dispatch} = store;
+
+            //将原始的dispatch传入func,执行后得到加强版的dispatch
+            let newDispatch = func(dispatch);
+
+            //返回的时候，用新的dispatch替代老的
+            return {...store, dispatch: newDispatch};
+        }
+
+        return newCreateStore;
+    }
+
+    return enhancer;
+}
+*/
 
 
 /**
@@ -195,7 +196,7 @@ export function applyMiddleware(...middlewares){
             //多个middleware， 先解构出 dispatch=>newDispatch 结构
             let chain = middlewares.map(middleware=> middleware(store));
 
-            //结构出最原始的dispatch
+            //解构出最原始的dispatch
             let { dispatch } = store;
 
             //用compose 执行，得到一个组合了所有newDispatch的函数,执行这个函数，得到newDispatch

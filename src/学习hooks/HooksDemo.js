@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useContext} from 'react';
+import React, {useState, useEffect} from 'react';
 
 /**
  * state Hook：
@@ -65,16 +65,4 @@ const HooksDemo2 = ()=>{
     </div>)
 };
 
-// export default HooksDemo2;
-
-const HooksDemo3 = ()=>{
-    let [count, setCount] = useState(0);
-
-    return (<div>
-        <button onClick={()=>{setCount(count+1)}}> + </button>
-        {count}
-        <button onClick={()=>{setCount(count-1)}}> - </button>
-    </div>)
-};
-
-export default HooksDemo3;
+export default HooksDemo2;
