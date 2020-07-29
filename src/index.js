@@ -52,14 +52,15 @@ serviceWorker.unregister();
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-// import App from './context学习/APP';
+// import App from './context学习/App';
 // import App from './context学习/官方demo_动态context值/App';
-import App from './context学习/官方demo_嵌套组件更新context/App';
+// import App from './context学习/官方demo_嵌套组件更新context/App';
+import App from './context学习/官方demo_消费多个context/App';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <App theme={'light'} signedInUser={"hahah"}/>
   </React.StrictMode>,
   document.getElementById('root')
 );

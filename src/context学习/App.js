@@ -29,7 +29,6 @@ function App() {
 
 function Toolbar(props){
     console.log(props);
-    // console.log(ThemeContext);
     //无需再传递自己不用的props
     return <ThemeButton/>
 };
