@@ -1,6 +1,10 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import HooksDemo from './学习hooks/HooksDemo1';
+
+/**
+ *
 
 function App() {
   return (
@@ -21,6 +25,18 @@ function App() {
       </header>
     </div>
   );
+}
+
+ */
+
+function App(){
+  console.log('变成更好的深V变化多方便是会飞的包陈红');
+  return (
+      <>
+        <p>vndfvndfjknvkjdnvk</p>
+        <HooksDemo/>
+      </>
+  )
 }
 
 export default App;

@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+// import {connect} from './自己实现react-redux';
 import { increment, decrement, reset } from './actions';
 
 function Counter(props) {
