@@ -37,11 +37,9 @@ import './index.css';
 // import App from './App';
 import App from './my_react-redux/App';
 import * as serviceWorker from './serviceWorker';
-import {Provider} from 'react-redux';
-// import {Provider} from './my_react-redux/自己实现react-redux';
+// import {Provider} from 'react-redux';
+import {Provider} from './my_react-redux/自己实现react-redux';
 import store from './my_react-redux/store';
-
-console.log('index.js----------lalalla-----');
 
 ReactDOM.render(
     <Provider store={store}>
